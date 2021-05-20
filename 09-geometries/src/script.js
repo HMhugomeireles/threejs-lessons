@@ -12,8 +12,28 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+//const geometry = new THREE.BoxGeometry(1, 1, 1, 4, 4, 4)
+const geometry = new THREE.BufferGeometry()
+
+const count = 500
+const maxPoints = count * 3 * 3
+/**
+ * Why 50 * 3 * 3?
+ * each triangle are create from 3 points so we are create 50 triangles 
+ */
+const positionArray = new Float32Array(maxPoints)
+
+for (let i = 0; i < maxPoints; i++) {
+    positionArray[i] = Math.random()
+}
+
+const positionsAttribute = new THREE.BufferAttribute(positionArray, 3);
+geometry.setAttribute('position', positionsAttribute);
+
+const material = new THREE.MeshBasicMaterial({ 
+    color: 0xff0000,
+    wireframe: true 
+})
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
