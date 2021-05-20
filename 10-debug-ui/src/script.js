@@ -2,7 +2,37 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+import * as dat from 'dat.gui'
 
+// Debug
+/** 
+     There are different types of elements you can add to that panel:
+    
+    Range —for numbers with minimum and maximum value
+    Color —for colors with various formats
+    Text —for simple texts
+    Checkbox —for booleans (true or false)
+    Select —for a choice from a list of values
+    Button —to trigger functions
+    Folder —to organize your panel if you have too many elements
+ */ 
+const gui = new dat.GUI({ closed: true, width: 300 })
+
+const debuggerObject = {
+    color: 0xff0000,
+    spin: () => {
+        gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + 10 })
+    }
+}
+
+gui
+    .add(debuggerObject, 'color')
+    .onChange(() => {
+        material.color.set(debuggerObject.color)
+    })
+
+gui
+    .add(debuggerObject, 'spin')
 /**
  * Base
  */
@@ -16,9 +46,22 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+const material = new THREE.MeshBasicMaterial({ color: debuggerObject.color })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
+
+// Debug
+gui
+    .add(mesh.position, 'y')
+    .min(-3)
+    .max(3)
+    .step(0.01)
+
+gui
+    .add(mesh, 'visible')
+
+gui
+    .add(material, 'wireframe')
 
 /**
  * Sizes
