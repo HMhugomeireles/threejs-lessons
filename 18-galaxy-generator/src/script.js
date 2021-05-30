@@ -56,9 +56,6 @@ const generateGalaxy = () => {
         const spinAngle = radius * parameters.spin
         const branchAngle = (i % parameters.branches) / parameters.branches * Math.PI * 2
 
-        const mixedColor = colorInside.clone()
-        mixedColor.lerp(colorOutside, radius / parameters.radius)
-
         const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : - 1) * parameters.randomness * radius
         const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : - 1) * parameters.randomness * radius
         const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : - 1) * parameters.randomness * radius
@@ -66,6 +63,9 @@ const generateGalaxy = () => {
         positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX
         positions[i3 + 1] = randomY
         positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ
+
+        const mixedColor = colorInside.clone()
+        mixedColor.lerp(colorOutside, radius / parameters.radius)
 
         colors[i3] = mixedColor.r
         colors[i3 + 1] = mixedColor.g
