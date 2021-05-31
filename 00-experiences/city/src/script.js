@@ -9,9 +9,14 @@ const {
     scene,
     controls,
     camera
-} = settings(THREE);
+} = settings();
 
-objectsLoads(THREE, scene)
+// Debug
+const gui = new dat.GUI()
+
+//gui.add(camera, 'position').min(-100).max(100).step(0.01)
+
+objectsLoads(scene)
 
 
 const clock = new THREE.Clock()

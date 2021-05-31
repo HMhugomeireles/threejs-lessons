@@ -1,20 +1,22 @@
+import * as THREE from 'three'
 import { sizes } from './parameters'
 import { loadingAssets } from './loading-assets'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-export function settings(THREE) {
+export function settings() {
   // Canvas
   const canvas = document.querySelector('canvas.webgl')
 
   // Scene
   const scene = new THREE.Scene()
+  scene.background = new THREE.Color( 0xcccccc );
 
   // load settings
   //const {} = loadingAssets(THREE);
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-  camera.position.z = 3
+  const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 1000)
+  camera.position.set(400, 200, 0)
   scene.add(camera)
 
   // Controls
