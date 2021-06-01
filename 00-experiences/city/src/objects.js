@@ -8,6 +8,7 @@ export function objectsLoads(scene) {
       color: '#3C8C3F'
     })
   )
+  terrine.position.set(200, 200, 20)
   scene.add(terrine);
 
 
